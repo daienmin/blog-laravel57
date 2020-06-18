@@ -71,6 +71,7 @@
     <div class="login-box bg-white clearfix">
         <div class="login-left">
             <form action="{{ url('admin/login/index') }}" method="post">
+                {{ csrf_field() }}
                 <div class="form-group has-feedback feedback-left">
                     <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
                     <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>

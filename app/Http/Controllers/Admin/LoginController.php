@@ -50,7 +50,7 @@ class LoginController extends Controller
             session(['user' => $userInfo[0]]);
             return redirect('admin/index/index');
         }
-        return view('admin.login.index1');
+        return view('admin.login.index'.rand(1, 4));
     }
 
     /*

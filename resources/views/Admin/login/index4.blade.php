@@ -106,21 +106,22 @@
             <a href="javascript:void(0);"><img src="{{ asset('images/logo-sidebar.png') }}" alt="logo" /></a>
         </div>
         <form action="{{ url('admin/login/index') }}" method="post">
+            {{ csrf_field() }}
             <div class="form-group">
                 <label for="username">用户名</label>
-                <input type="text" class="form-control" id="username" placeholder="请输入您的用户名">
+                <input type="text" class="form-control" id="username" name="username" placeholder="请输入您的用户名">
             </div>
 
             <div class="form-group">
                 <label for="password">密码</label>
-                <input type="password" class="form-control" id="password" placeholder="请输入您的密码">
+                <input type="password" class="form-control" id="password" name="password" placeholder="请输入您的密码">
             </div>
 
             <div class="form-group">
                 <label for="captcha">验证码</label>
                 <div class="row">
                     <div class="col-xs-7">
-                        <input type="text" name="captcha" id="captcha" class="form-control" placeholder="验证码">
+                        <input type="text" name="captcha" id="captcha" name="captcha" class="form-control" placeholder="验证码">
                     </div>
                     <div class="col-xs-5">
                         <img src="{{ captcha_src('default') }}" class="pull-right" id="captcha" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
