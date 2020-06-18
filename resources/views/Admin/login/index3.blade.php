@@ -74,7 +74,7 @@
             <div class="login-header text-center">
                 <a href="javascript:void(0);"> <img alt="light year admin" src="{{ asset('images/logo-sidebar.png') }}"> </a>
             </div>
-            <form action="#!" method="post">
+            <form action="{{ url('admin/login/index') }}" method="post">
                 <div class="form-group has-feedback feedback-left">
                     <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
                     <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
@@ -92,13 +92,13 @@
                         <img src="{{ captcha_src('default') }}" class="pull-right" id="captcha" style="cursor: pointer;" onclick="this.src=this.src+'?d='+Math.random();" title="点击刷新" alt="captcha">
                     </div>
                 </div>
+                @if (session('msg'))
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert">{{ session('msg') }}</div>
+                    </div>
+                @endif
                 <div class="form-group">
-                    <label class="lyear-checkbox checkbox-primary m-t-10 text-white">
-                        <input type="checkbox"><span>5天内自动登录</span>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-block btn-primary" type="button" onclick="location.href='index.html'">立即登录</button>
+                    <button class="btn btn-block btn-primary" type="submit">立即登录</button>
                 </div>
             </form>
             <footer class="col-sm-12 text-center text-white">
@@ -107,8 +107,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-    <script type="text/javascript">;</script>
 @endsection

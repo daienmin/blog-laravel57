@@ -75,11 +75,6 @@
                     <div class="alert alert-danger" role="alert">{{ session('msg') }}</div>
                 </div>
                 @endif
-                {{--<div class="form-group">
-                    <label class="lyear-checkbox checkbox-primary m-t-10">
-                        <input type="checkbox"><span>5天内自动登录</span>
-                    </label>
-                </div>--}}
                 <div class="form-group">
                     <button class="btn btn-block btn-primary" type="submit">立即登录</button>
                 </div>
@@ -91,8 +86,4 @@
         </div>
     </div>
 </div>
-@endsection
-
-@section('script')
-    <script type="text/javascript">;</script>
 @endsection

@@ -103,9 +103,9 @@
     <div class="lyear-login-right">
 
         <div class="lyear-logo text-center">
-            <a href="#!"><img src="{{ asset('images/logo-sidebar.png') }}" alt="logo" /></a>
+            <a href="javascript:void(0);"><img src="{{ asset('images/logo-sidebar.png') }}" alt="logo" /></a>
         </div>
-        <form action="#!" method="post">
+        <form action="{{ url('admin/login/index') }}" method="post">
             <div class="form-group">
                 <label for="username">用户名</label>
                 <input type="text" class="form-control" id="username" placeholder="请输入您的用户名">
@@ -128,11 +128,11 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="lyear-checkbox checkbox-primary m-t-10">
-                    <input type="checkbox" checked=""><span>5天内自动登录</span>
-                </label>
-            </div>
+            @if (session('msg'))
+                <div class="form-group">
+                    <div class="alert alert-danger" role="alert">{{ session('msg') }}</div>
+                </div>
+            @endif
 
             <div class="form-group">
                 <button class="btn btn-block btn-primary" type="submit">立即登录</button>
@@ -144,8 +144,4 @@
 
     </div>
 </div>
-@endsection
-
-@section('script')
-    <script type="text/javascript">;</script>
 @endsection

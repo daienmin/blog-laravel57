@@ -15,10 +15,10 @@ class AdminAuth
      */
     public function handle($request, Closure $next)
     {
-        // 如果不是管理员或者没有登录;则重定向到登录页面
-        /*if (!Auth::guard('admin')->check()) {
+        // 如果没有登录;则重定向到登录页面
+        if (!session('user')) {
             return redirect('admin/login/index');
-        }*/
+        }
         return $next($request);
     }
 }
