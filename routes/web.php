@@ -11,11 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// 前台
 
-// 后台登录
+// 后台
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
     Route::redirect('/', url('admin/login/index'));
     Route::group(['prefix' => 'login'], function () {
@@ -29,22 +27,25 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
 });
 // Admin 模块
 Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['admin.auth']], function () {
-    // 首页控制器
-    Route::prefix('index')->group(function () {
-        // 后台首页
+
+    // 后台首页
+    Route::group(['prefix' => 'index'], function () {
         Route::get('index', 'IndexController@index');
-        // 更新系统
-//        Route::get('upgrade', 'IndexController@upgrade');
-        // For local testing only
-//        Route::get('loginUserForTest', 'IndexController@loginUserForTest');
     });
 
     // 用户管理
     Route::resource('user_manage', 'UserManageController');
-    /*Route::group(['prefix' => 'user_manage'], function () {
-        // 用户列表
-        Route::get('index', 'UserManageController@index');
-    });*/
+
+    // 标签管理
+    Route::resource('label', 'LabelController');
+
+    // 分类管理
+    Route::resource('category', 'CategoryController');
+
+    // 文章管理
+    Route::resource('article', 'ArticleController');
+
+
 
     // 文章管理
    /* Route::prefix('article')->group(function () {

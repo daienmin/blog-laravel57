@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\{Schema, DB};
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -26,6 +26,7 @@ class CreateAdminRolesTable extends Migration
                 ->comment('描述');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE `admin_roles` comment '角色表'");
     }
 
     /**
