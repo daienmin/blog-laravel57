@@ -39,7 +39,7 @@ class LoginController extends Controller
             if (!captcha_check($data['captcha'])) {
                 return back()->with('msg', '验证码错误！');
             }
-            $userInfo = AdminUser::where('username', $data['username'])->get()->toArray();
+            $userInfo = AdminUser::where(['username' => $data['username'], 'status' => 1])->get()->toArray();
             if (empty($userInfo)) {
                 return back()->with('msg', '用户不存在');
             }

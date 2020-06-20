@@ -104,6 +104,25 @@
                                 <li> <a href="#!">一级菜单</a> </li>
                             </ul>
                         </li>
+                        <li class="nav-item nav-item-has-subnav">
+                            <a href="javascript:void(0)"><i class="mdi mdi-account-multiple"></i> 后台用户管理</a>
+                            <ul class="nav nav-subnav">
+                                <li> <a href="{{ url('admin/user_manage') }}">用户列表</a> </li>
+                                {{--<li> <a href="lyear_ui_cards.html">卡片</a> </li>
+                                <li> <a href="lyear_ui_grid.html">格栅</a> </li>
+                                <li> <a href="lyear_ui_icons.html">图标</a> </li>
+                                <li> <a href="lyear_ui_tables.html">表格</a> </li>
+                                <li> <a href="lyear_ui_modals.html">模态框</a> </li>
+                                <li> <a href="lyear_ui_tooltips_popover.html">提示 / 弹出框</a> </li>
+                                <li> <a href="lyear_ui_alerts.html">警告框</a> </li>
+                                <li> <a href="lyear_ui_pagination.html">分页</a> </li>
+                                <li> <a href="lyear_ui_progress.html">进度条</a> </li>
+                                <li> <a href="lyear_ui_tabs.html">标签页</a> </li>
+                                <li> <a href="lyear_ui_typography.html">排版</a> </li>
+                                <li> <a href="lyear_ui_step.html">步骤</a> </li>
+                                <li> <a href="lyear_ui_other.html">其他</a> </li>--}}
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
 
@@ -127,7 +146,7 @@
                             <span class="lyear-toggler-bar"></span>
                             <span class="lyear-toggler-bar"></span>
                         </div>
-                        <span class="navbar-page-title"> 后台首页 </span>
+                        <span class="navbar-page-title"> @yield('c_header_title') </span>
                     </div>
 
                     <ul class="topbar-right">
@@ -290,52 +309,5 @@
 <script type="text/javascript" src="{{ asset('js/admin/perfect-scrollbar.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/admin/main.min.js') }}"></script>
 @yield('script')
-<!--图表插件-->
-<script type="text/javascript" src="{{ asset('js/admin/Chart.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready(function(e) {
-        var $dashChartBarsCnt  = jQuery( '.js-chartjs-bars' )[0].getContext( '2d' ),
-            $dashChartLinesCnt = jQuery( '.js-chartjs-lines' )[0].getContext( '2d' );
-
-        var $dashChartBarsData = {
-            labels: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-            datasets: [
-                {
-                    label: '注册用户',
-                    borderWidth: 1,
-                    borderColor: 'rgba(0,0,0,0)',
-                    backgroundColor: 'rgba(51,202,185,0.5)',
-                    hoverBackgroundColor: "rgba(51,202,185,0.7)",
-                    hoverBorderColor: "rgba(0,0,0,0)",
-                    data: [2500, 1500, 1200, 3200, 4800, 3500, 1500]
-                }
-            ]
-        };
-        var $dashChartLinesData = {
-            labels: ['2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014'],
-            datasets: [
-                {
-                    label: '交易资金',
-                    data: [20, 25, 40, 30, 45, 40, 55, 40, 48, 40, 42, 50],
-                    borderColor: '#358ed7',
-                    backgroundColor: 'rgba(53, 142, 215, 0.175)',
-                    borderWidth: 1,
-                    fill: false,
-                    lineTension: 0.5
-                }
-            ]
-        };
-
-        new Chart($dashChartBarsCnt, {
-            type: 'bar',
-            data: $dashChartBarsData
-        });
-
-        var myLineChart = new Chart($dashChartLinesCnt, {
-            type: 'line',
-            data: $dashChartLinesData,
-        });
-    });
-</script>
 </body>
 </html>

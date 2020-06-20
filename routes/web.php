@@ -39,6 +39,13 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
 //        Route::get('loginUserForTest', 'IndexController@loginUserForTest');
     });
 
+    // 用户管理
+    Route::resource('user_manage', 'UserManageController');
+    /*Route::group(['prefix' => 'user_manage'], function () {
+        // 用户列表
+        Route::get('index', 'UserManageController@index');
+    });*/
+
     // 文章管理
    /* Route::prefix('article')->group(function () {
         // 文章列表

@@ -1,5 +1,6 @@
 @extends('layouts.admin.common')
 
+@section('c_header_title', '后台首页')
 
 @section('content')
     <main class="lyear-layout-content">
