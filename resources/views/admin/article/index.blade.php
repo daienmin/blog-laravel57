@@ -66,11 +66,11 @@
                                             </label>
                                         </td>--}}
                                         <td>{{ $val->id }}</td>
-                                        <td>{{ $val->titile }}</td>
-                                        <td></td>
-                                        <td>@if ($val->img_url) <img src="{{ $val->img_url }}" style="max-width: 50px;" alt=""> @endif</td>
+                                        <td>{{ $val->title }}</td>
+                                        <td>{{ $val->category->cate_name }}</td>
+                                        <td>@if ($val->img_url) <img src="{{ config('filesystems.disks.public.url').'/'.explode(',', $val->img_url)[0] }}" style="max-width: 80px;" alt=""> @endif</td>
                                         <td>{{ $val->views }}</td>
-                                        <td>作者</td>
+                                        <td>{{ $val->user->username }}</td>
                                         <td>
                                             @if ($val->status)
                                                 已发布

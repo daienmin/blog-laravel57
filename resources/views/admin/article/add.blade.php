@@ -11,14 +11,22 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form action="{{ url('admin/article') }}" method="post" class="row">
                                 {{ csrf_field() }}
                                 <div class="form-group col-md-12">
                                     <label for="type">分类</label>
                                     <div class="form-controls">
-                                        <select name="type" class="form-control" id="type">
-                                            <option value="0" selected>请选择</option>
+                                        <select name="cate_id" class="form-control" id="cate_id">
+                                            <option value="" selected>请选择</option>
                                             @foreach($cate as $v)
                                                 <option value="{{ $v->id }}">{{ str_repeat('|——', $v->level) }}{{ $v->cate_name }}</option>
                                             @endforeach
@@ -41,17 +49,10 @@
                                     <label>多图上传</label>
                                     <div class="form-controls">
                                         <ul class="list-inline clearfix lyear-uploads-pic">
+
                                             <li class="col-xs-4 col-sm-3 col-md-2">
-                                                <figure>
-                                                    <img src="{{ asset('images/gallery/15.jpg') }}" alt="图片一">
-                                                    <figcaption>
-                                                        <a class="btn btn-round btn-square btn-primary" href="#!"><i class="mdi mdi-eye"></i></a>
-                                                        <a class="btn btn-round btn-square btn-danger" href="#!"><i class="mdi mdi-delete"></i></a>
-                                                    </figcaption>
-                                                </figure>
-                                            </li>
-                                            <li class="col-xs-4 col-sm-3 col-md-2">
-                                                <a class="pic-add" id="add-pic-btn" href="#!" title="点击上传"></a>
+                                                <input type="file" id="upload_img" class="hide upload-img" name="img" value="">
+                                                <a class="pic-add" id="add-pic-btn" href="javascript:void(0);" title="点击上传"></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -110,6 +111,8 @@
 @endsection
 
 @section('script')
+    <link rel="stylesheet" href="{{ asset('js/admin/jconfirm/jquery-confirm.min.css') }}">
+    <script src="{{ asset('js/admin/jconfirm/jquery-confirm.min.js') }}"></script>
     <style>
         .divider{width: auto;}
     </style>
@@ -241,5 +244,88 @@
                 testEditor.config("tocDropdown", false);
             });
         });*/
+    </script>
+
+    <script type="text/javascript">
+        $('#add-pic-btn').click(function () {
+            if ($('.lyear-uploads-pic li').length >= 4) {
+                $.confirm({
+                    title: '提示',
+                    content: '最多上传3张图片！',
+                    type: 'orange',
+                    typeAnimated: true,
+                    buttons: {
+                        close: {
+                            text: '关闭'
+                        }
+                    }
+                });
+                return false;
+            }
+            $('input.upload-img').click();
+        });
+        // 图片上传
+        $('input.upload-img').change(function () {
+            var formData = new FormData();
+            formData.append('img', document.getElementById('upload_img').files[0]);
+            $.ajax({
+                type: 'POST',
+                url: '{{ url('admin/article/upload_img') }}',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (res) {
+                    if (res.status == 0) {
+                        var prefixUrl = '{{ config('filesystems.disks.public.url') }}';
+                        var htmlStr = '<li class="col-xs-4 col-sm-3 col-md-2"><figure>\n' +
+                            '<img src=" ' + prefixUrl + '/' + res.url + ' " alt="">\n' +
+                            '<figcaption>\n' +
+                            '<input type="hidden" name="img_url[]" value="' + res.url + '">\n' +
+                            '<a class="btn btn-round btn-square btn-primary hide" href="#!"><i class="mdi mdi-eye"></i></a>\n' +
+                            '<a class="btn btn-round btn-square btn-danger img-del" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a>\n' +
+                            '</input></figure></li>';
+                        $('.lyear-uploads-pic li:last-child').before(htmlStr);
+                    } else {
+                        $.confirm({
+                            title: '错误提示',
+                            content: res.msg,
+                            type: 'red',
+                            typeAnimated: true,
+                            buttons: {
+                                close: {
+                                    text: '关闭'
+                                }
+                            }
+                        });
+                    }
+                    $('input.upload-img').val('');
+                }
+            });
+        });
+
+        // 图片删除
+        $(document).on('click', '.img-del', function(){
+            var _that = $(this);
+            var img_url = _that.siblings('input[name="img_url[]"]').val();
+            $.post('{{ url('admin/article/del_img') }}', {img_url: img_url}, function (res) {
+                if (res.status == 0) {
+                    _that.parents('li').remove();
+                } else {
+                    $.confirm({
+                        title: '错误提示',
+                        content: res.msg,
+                        type: 'red',
+                        typeAnimated: true,
+                        buttons: {
+                            close: {
+                                text: '关闭'
+                            }
+                        }
+                    });
+                }
+            });
+        });
     </script>
 @endsection

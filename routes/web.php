@@ -45,6 +45,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['adm
     // 文章管理
     Route::resource('article', 'ArticleController');
 
+    // 图片上传
+    Route::post('article/upload_img', 'ArticleController@uploadImg');
+
+    // 图片删除
+    Route::post('article/del_img', 'ArticleController@delImg');
+
 
 
     // 文章管理
