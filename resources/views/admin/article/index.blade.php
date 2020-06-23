@@ -89,7 +89,7 @@
                                         <td>{{ $val->updated_at }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-xs btn-default" href="{{ url('admin/label/' . $val->id . '/edit') }}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
+                                                <a class="btn btn-xs btn-default" href="{{ url('admin/article/' . $val->id . '/edit') }}" title="编辑" data-toggle="tooltip"><i class="mdi mdi-pencil"></i></a>
                                                 <a class="btn btn-xs btn-default user-del" href="javascript:void(0);" data-id="{{ $val->id }}" title="删除" data-toggle="tooltip"><i class="mdi mdi-window-close"></i></a>
                                             </div>
                                         </td>
@@ -126,16 +126,16 @@
         $('.user-del').on('click', function () {
             var id = $(this).attr('data-id');
             $.confirm({
-                title: '删除标签',
-                content: '确认要删除这个标签吗？',
+                title: '提示',
+                content: '确认要删除这篇文章吗？',
                 buttons: {
                     confirm: {
                         text: '确认',
                         action: function(){
-                            $.post("{{ url('admin/label') }}/"+id, {"_method": "delete", "_token": "{{ csrf_token() }}"}, function (res) {
+                            $.post("{{ url('admin/article') }}/"+id, {"_method": "delete", "_token": "{{ csrf_token() }}"}, function (res) {
                                 if (res.status == 0) {
                                     $.confirm({
-                                        title: '错误提示',
+                                        title: '提示',
                                         content: res.msg,
                                         type: 'red',
                                         typeAnimated: true,

@@ -18,9 +18,6 @@ class ArticleController extends Controller
      * */
     public function index()
     {
-//        dd(storage_path('app'));
-//        dd(public_path());
-
         $art = Article::paginate(10);
         return view('admin.article.index', ['art' => $art]);
     }
@@ -56,7 +53,7 @@ class ArticleController extends Controller
         $obj->status = $data['status'];
         $obj->u_id = $request->session()->get('user.id');
 
-        if($obj->save()){
+        if ($obj->save()) {
             return redirect('admin/article');
         }
         return back()->withErrors(['添加文章失败，请稍后重试']);
@@ -88,17 +85,34 @@ class ArticleController extends Controller
      * */
     public function update($id, Request $request)
     {
-        $user = Article::find($id);
-        $password = $request->get('password', '');
-        $status = $request->get('status');
-        if ($password) {
-            $user->password = encrypt($password);
-        }
-        $user->status = $status;
-        if ($user->save()) {
+        $obj = Article::find($id);
+        $request->validate([
+            'cate_id' => 'required',
+            'title' => 'required|min:2|max:100',
+
+        ],
+            [
+                'cate_id.required' => '请选择分类',
+                'title.required' => '请输入文章标题',
+                'title.min' => '文章标题不能小于2个字符',
+                'title.max' => '文章标题不能大于100个字符',
+            ]
+        );
+        $data = $request->except(['_token', 's']);
+        $obj->cate_id = $data['cate_id'];
+        $obj->title = $data['title'];
+        $obj->content = $data['content'];
+        $obj->keywords = $data['keywords'] ?: '';
+        $obj->description = $data['description'] ?: '';
+        $obj->img_url = !empty($data['img_url']) ? implode(',', $data['img_url']) : '';
+        $obj->label_id = $data['label'];
+        $obj->recommend = $data['recommend'];
+        $obj->status = $data['status'];
+
+        if ($obj->save()) {
             return redirect('admin/article');
         }
-        return back()->with('error', '更新失败');
+        return back()->withErrors(['修改文章失败，请稍后重试']);
     }
 
     /*
@@ -107,9 +121,11 @@ class ArticleController extends Controller
      * */
     public function destroy($id)
     {
-        $user = Article::find($id);
+        $art = Article::find($id);
         $res = ['status' => 0, 'msg' => '删除失败！'];
-        if ($user->delete()) {
+        if ($art->delete()) {
+            // 此处文件删除待完善
+
             $res['status'] = 1;
             $res['msg'] = '删除成功！';
         }
@@ -122,9 +138,15 @@ class ArticleController extends Controller
      * */
     public function edit($id)
     {
-        $user = Article::find($id);
-//        dd($user);
-        return view('admin.article.edit', ['user' => $user]);
+        $art = Article::find($id);
+        if ($art->img_url) {
+            $art->img_url = explode(',', $art->img_url);
+        }
+        return view('admin.article.edit', [
+            'art' => $art,
+            'cate' => (new Category())->getTreeCate(),
+            'label' => (new Label())::select(['id', 'label_name'])->get(),
+        ]);
     }
 
     /**
@@ -160,7 +182,7 @@ class ArticleController extends Controller
     public function delImg(Request $request)
     {
         $img_url = $request->post('img_url');
-        $url = '/'.$img_url;
+        $url = '/' . $img_url;
         $storage = Storage::disk('public');
         if ($storage->exists($url) && $storage->delete($url)) {
             return response()->json(['status' => 0, 'msg' => '删除文件成功']);

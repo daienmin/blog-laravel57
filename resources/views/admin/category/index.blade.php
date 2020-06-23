@@ -112,7 +112,7 @@
         $('.user-del').on('click', function () {
             var id = $(this).attr('data-id');
             $.confirm({
-                title: '删除分类',
+                title: '提示',
                 content: '确认要删除这个分类吗？',
                 buttons: {
                     confirm: {
@@ -121,7 +121,7 @@
                             $.post("{{ url('admin/category') }}/"+id, {"_method": "delete", "_token": "{{ csrf_token() }}"}, function (res) {
                                 if (res.status == 0) {
                                     $.confirm({
-                                        title: '错误提示',
+                                        title: '提示',
                                         content: res.msg,
                                         type: 'red',
                                         typeAnimated: true,

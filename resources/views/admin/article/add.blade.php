@@ -1,6 +1,6 @@
 @extends('layouts.admin.common')
 
-@section('c_header_title', '文章管理 - 添加标签')
+@section('c_header_title', '文章管理 - 添加文章')
 
 @section('content')
     <main class="lyear-layout-content">
@@ -285,11 +285,11 @@
                             '<input type="hidden" name="img_url[]" value="' + res.url + '">\n' +
                             '<a class="btn btn-round btn-square btn-primary hide" href="#!"><i class="mdi mdi-eye"></i></a>\n' +
                             '<a class="btn btn-round btn-square btn-danger img-del" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a>\n' +
-                            '</input></figure></li>';
+                            '</figcaption></figure></li>';
                         $('.lyear-uploads-pic li:last-child').before(htmlStr);
                     } else {
                         $.confirm({
-                            title: '错误提示',
+                            title: '提示',
                             content: res.msg,
                             type: 'red',
                             typeAnimated: true,
@@ -314,7 +314,7 @@
                     _that.parents('li').remove();
                 } else {
                     $.confirm({
-                        title: '错误提示',
+                        title: '提示',
                         content: res.msg,
                         type: 'red',
                         typeAnimated: true,
