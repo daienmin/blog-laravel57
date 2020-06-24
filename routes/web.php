@@ -12,6 +12,13 @@
 */
 
 // 前台
+Route::group(['namespace' => 'Web'], function () {
+    Route::get('/', 'IndexController@index');
+    Route::get('/list/{:id}', 'IndexController@c_list');
+    Route::get('/info/{:id}', 'IndexController@info');
+    Route::get('/about', 'IndexController@about');
+});
+
 
 // 后台
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
