@@ -18,7 +18,7 @@ class ArticleController extends Controller
      * */
     public function index()
     {
-        $art = Article::paginate(10);
+        $art = Article::orderBy('id', 'desc')->paginate(10);
         return view('admin.article.index', ['art' => $art]);
     }
 
@@ -123,8 +123,15 @@ class ArticleController extends Controller
     {
         $art = Article::find($id);
         $res = ['status' => 0, 'msg' => '删除失败！'];
+        $img_url = $art->img_url;
         if ($art->delete()) {
-            // 此处文件删除待完善
+            // 删除图片
+            if ($img_url) {
+                $img_url = array_map(function ($v) {
+                    return '/'.$v;
+                }, explode(',', $img_url));
+                Storage::disk('public')->delete($img_url);
+            }
 
             $res['status'] = 1;
             $res['msg'] = '删除成功！';
