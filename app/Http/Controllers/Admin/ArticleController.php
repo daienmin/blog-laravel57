@@ -8,7 +8,6 @@ use App\Http\Model\Label;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 
 class ArticleController extends Controller
 {

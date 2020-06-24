@@ -27,19 +27,19 @@
 
                 <nav class="sidebar-main">
                     <ul class="nav nav-drawer">
-                        <li class="nav-item active"> <a href="{{ url('admin/index/index') }}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
-                        <li class="nav-item nav-item-has-subnav">
+                        <li class="nav-item {{ str_contains(url()->current(), 'admin/index/index') ? 'active' : '' }}"> <a href="{{ url('admin/index/index') }}"><i class="mdi mdi-home"></i> 后台首页</a> </li>
+                        <li class="nav-item nav-item-has-subnav {{ \Illuminate\Support\Str::contains(url()->current(), ['admin/article', 'admin/category', 'admin/label']) ? 'open' : '' }}">
                             <a href="javascript:void(0)"><i class="mdi mdi-book"></i> 文章管理</a>
                             <ul class="nav nav-subnav">
-                                <li> <a href="{{ url('admin/article') }}">文章管理</a> </li>
-                                <li> <a href="{{ url('admin/category') }}">分类管理</a> </li>
-                                <li> <a href="{{ url('admin/label') }}">标签管理</a> </li>
+                                <li class="{{ str_contains(url()->current(), 'admin/article') ? 'active' : '' }}"> <a href="{{ url('admin/article') }}">文章列表</a> </li>
+                                <li class="{{ str_contains(url()->current(), 'admin/category') ? 'active' : '' }}"> <a href="{{ url('admin/category') }}">分类管理</a> </li>
+                                <li class="{{ str_contains(url()->current(), 'admin/label') ? 'active' : '' }}"> <a href="{{ url('admin/label') }}">标签管理</a> </li>
                             </ul>
                         </li>
-                        <li class="nav-item nav-item-has-subnav">
+                        <li class="nav-item nav-item-has-subnav {{ str_contains(url()->current(), 'admin/user_manage') ? 'open' : '' }}">
                             <a href="javascript:void(0)"><i class="mdi mdi-account-multiple"></i> 后台用户管理</a>
                             <ul class="nav nav-subnav">
-                                <li> <a href="{{ url('admin/user_manage') }}">用户列表</a> </li>
+                                <li class="{{ str_contains(url()->current(), 'admin/user_manage') ? 'active' : '' }}"> <a href="{{ url('admin/user_manage') }}">用户列表</a> </li>
                             </ul>
                         </li>
                     </ul>
