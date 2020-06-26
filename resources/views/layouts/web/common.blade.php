@@ -21,11 +21,12 @@
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
             <li><a href="/">首页</a></li>
-            <li><a href="share.html">模板分享</a></li>
-            <li><a href="list.html">学无止境</a></li>
-            <li><a href="info.html">慢生活</a></li>
-            <li><a href="shareinfo.html">模板内容页</a></li>
-            <li><a href="{{ url('/about') }}">关于我</a></li>
+            @if(!$cate_list->isEmpty())
+                @foreach($cate_list as $v)
+                    <li><a href="{{ url('/category/' . $v->id) }}">{{ $v->cate_name }}</a></li>
+                @endforeach
+            @endif
+            {{--<li><a href="{{ url('/about') }}">关于我</a></li>--}}
         </ul>
         <div class="clear"></div>
     </div>

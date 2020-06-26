@@ -14,9 +14,10 @@
 // 前台
 Route::group(['namespace' => 'Web'], function () {
     Route::get('/', 'IndexController@index');
-    Route::get('/list/{:id}', 'IndexController@c_list');
-    Route::get('/info/{:id}', 'IndexController@info');
-    Route::get('/about', 'IndexController@about');
+    Route::get('/category/{id}', 'IndexController@category');
+    Route::get('/article/{id}', 'IndexController@article');
+    Route::get('/tag/{id}', 'IndexController@tag');
+//    Route::get('/about', 'IndexController@about');
 });
 
 

@@ -33,4 +33,14 @@ class Category extends Model
         }
         return $array;
     }
+
+    /**
+     * 返回顶级分类
+     * @return mixed
+     */
+    public static function getTopCate()
+    {
+        return self::where(["status" => 1, "pid" => 0])->orderBy('sort', 'asc')->orderBy('id', 'asc')->get();
+    }
+
 }

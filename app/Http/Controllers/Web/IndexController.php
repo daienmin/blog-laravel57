@@ -2,29 +2,46 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Model\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Model\Category;
 
 class IndexController extends Controller
 {
-    //
+    public $data = [];
+
+    public function __construct()
+    {
+        $this->data['cate_list'] = Category::getTopCate();
+        $this->data['recommend_list'] = Article::recommendList();
+        $this->data['click_list'] = Article::clickList();
+    }
+
+    // 首页
     public function index()
     {
-        return view('web.index');
+        $this->data['list'] = Article::indexList();
+        return view('web.index', $this->data);
     }
 
-    public function c_list($id)
+    public function category($id)
     {
-        return view('web.list');
+        return view('web.list', $this->data);
     }
 
-    public function info($id)
+    public function article($id)
     {
-        return view('web.info');
+        return view('web.info', $this->data);
     }
 
-    public function about()
+    public function tag($id)
     {
-        return view('web.about');
+        return view('web.list', $this->data);
     }
+
+    /*public function about()
+    {
+        return view('web.about', $this->data);
+    }*/
 }

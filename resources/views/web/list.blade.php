@@ -1,52 +1,11 @@
-<!doctype html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>首页_杨青个人博客 - 一个站在web前端设计之路的女技术员个人博客网站</title>
-<meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青" />
-<meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="css/base.css" rel="stylesheet">
-<link href="css/index.css" rel="stylesheet">
-<link href="css/m.css" rel="stylesheet">
-<!--[if lt IE 9]>
-<script src="js/modernizr.js"></script>
-<![endif]-->
-</head>
-<body>
-<header>
-<div id="mnav">
-   <div class="logo"><a href="/">杨青个人博客</a></div>
-    <h2 id="mnavh"><span class="navicon"></span></h2>
-    <ul id="starlist">
-      <li><a href="index.html">网站首页</a></li>
-      <li><a href="about.html">关于我</a></li>
-      <li><a href="share.html">模板分享</a></li>
-      <li><a href="list.html">学无止境</a></li>
-      <li><a href="info.html">慢生活</a></li>
-      <li><a href="shareinfo.html">模板内容页</a></li>
-      <li><a href="gbook.html">留言</a></li>
-    </ul>
-</div>
-<script>
-window.onload = function ()
-{
-	var oH2 = document.getElementById("mnavh"); 
-	var oUl = document.getElementById("starlist");  
-	oH2.onclick = function ()
-	{
-		var style = oUl.style;
-		style.display = style.display == "block" ? "none" : "block";
-		oH2.className = style.display == "block" ? "open" : ""
-	}
-}
-</script>
-</header>
-<div class="line46"></div>
+@extends('layouts.web.common')
+
+@section('content')
 <article>
+  <div class="blank"></div>
   <div class="leftbox">
     <div class="newblogs">
-      <h2 class="hometitle"><span><a href="/jstt/bj/">心得笔记</a><a href="/jstt/css3/">CSS3|Html5</a><a href="/jstt/web/">网站建设</a></span>学无止境</h2>
+      <h2 class="hometitle">学无止境</h2>
       <ul>
         <li>
           <h3 class="blogtitle"><a href="/" target="_blank" >6条网页设计配色原则,让你秒变配色高手</a></h3>
@@ -123,68 +82,23 @@ window.onload = function ()
     </div>
   </div>
   <div class="rightbox">
-  <div class="blank"></div>
-    <div class="search">
-      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
-        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
-        <input name="show" value="title" type="hidden">
-        <input name="tempid" value="1" type="hidden">
-        <input name="tbname" value="news" type="hidden">
-        <input name="Submit" class="input_submit" value="搜索" type="submit">
-      </form>
-    </div>
-    <div class="paihang">
-      <h2 class="ab_title"><a href="/">本栏推荐</a></h2>
-      <ul>
-        <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-        </li>
-        <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-        </li>
-        <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-          <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-          <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-          <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-        </li>
-      </ul>
-      <div class="ad"><img src="images/ad300x100.jpg"></div>
-    </div>
-    <div class="paihang">
-      <h2 class="ab_title"><a href="/">点击排行</a></h2>
-      <ul>
-        <li><b><a href="/" target="_blank">住在手机里的朋友</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门无学...</p>
-        </li>
-        <li><b><a href="/" target="_blank">教你怎样用欠费手机拨打电话</a></b>
-          <p>对于刚毕业的学生来说，想学习建网站，掌握一技之长，最简单的入门...</p>
-        </li>
-        <li><b><a href="/" target="_blank">原来以为，一个人的勇敢是，删掉他的手机号码</a></b>
-          <p>.先前发表过一篇文章《如果要学习web前端开发，需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">手机的16个惊人小秘密，据说99.999%的人都不知</a></b>
-          <p>对于刚毕业的学生来说，.需要学习什么？》</p>
-        </li>
-        <li><b><a href="/" target="_blank">你面对的是生活而不是手机</a></b>
-          <p>.最简单的入门无非就是学会html和css，先前发表过一篇文章...</p>
-        </li>
-      </ul>
-      <div class="ad"><img src="images/ad01.jpg"></div>
-    </div>
-    <div class="weixin">
+    @component('components.search')
+    @endcomponent
+
+    @component('components.list', ['list' => $recommend_list, 'title' => '置顶推荐'])
+    @endcomponent
+
+    @component('components.list', ['list' => $click_list, 'title' => '置顶推荐'])
+    @endcomponent
+
+    @component('components.link')
+    @endcomponent
+    {{--<div class="weixin">
       <h2 class="ab_title">微信关注</h2>
       <ul>
         <img src="images/wx.jpg">
       </ul>
-    </div>
+    </div>--}}
   </div>
 </article>
-<footer>
-  <p>Design by <a href="/">杨青个人博客</a> <a href="/">蜀ICP备11002373号-1</a></p>
-</footer>
-</body>
-</html>
+@endsection

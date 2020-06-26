@@ -65,13 +65,12 @@ h3.blogtitle:hover a { color: #000 }
 /*排行*/
 .paihang { background: #FFF; border-radius: 10px; overflow: hidden; margin: 20px 0 }
 .paihang ul { padding: 10px; }
-.paihang ul li { border-bottom: solid 1px #EAEAEA; font-size: 14px; margin: 0 0 10px 0; padding: 0 0 10px 0; overflow: hidden; }
+.paihang ul li { font-size: 14px; overflow: hidden; }
 .paihang ul li b { height: 30px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; display: block; }
 .paihang li i { width: 100px; height: 90px; overflow: hidden; display: block; border: #efefef 1px solid; float: left; margin-right: 10px; }
 .paihang li i img { height: 100%; margin: auto; -moz-transition: all .5s ease; -webkit-transition: all .5s ease; transition: all .5s ease; }
 .paihang ul li p { line-height: 24px; color: #888 }
 .paihang ul li a:hover { color: #000; }
-.paihang ul li:hover { border-bottom: #000 1px solid; }/* 鼠标放上去的效果 */
 .paihang ul li:hover p { color: #000; }
 .paihang ul li:hover b a { color: #000; }
 .paihang ul li:hover i img { transform: scale(1.03) }
