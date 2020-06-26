@@ -1,1 +1,1 @@
-my test blog used by laravel
+blog used laravel5.7 framework
