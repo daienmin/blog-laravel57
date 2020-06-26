@@ -27,6 +27,11 @@ class IndexController extends Controller
 
     public function category($id)
     {
+        if (!$id) {
+            redirect('/');
+        }
+        $this->data['cate_info'] = Category::getOne((int) $id);
+        $this->data['list'] = Article::cateList((int) $id);
         return view('web.list', $this->data);
     }
 

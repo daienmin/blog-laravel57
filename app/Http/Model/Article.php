@@ -3,6 +3,7 @@
 namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Http\Model\Category;
 
 class Article extends Model
 {
@@ -36,5 +37,13 @@ class Article extends Model
     {
         return self::where(["status" => 1])->orderBy('views', 'desc')->limit(5)->get();
     }
+
+    public static function cateList($id, $size = 10)
+    {
+        $cate_ids = (new Category())->getCateChild($id);
+        return self::whereIn('cate_id', $cate_ids)->orderBy('id', 'desc')->paginate($size);
+    }
+
+
 
 }

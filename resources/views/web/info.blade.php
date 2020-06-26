@@ -1,5 +1,9 @@
 @extends('layouts.web.common')
 
+@section('title', '');
+@section('keywords', '');
+@section('description', '');
+
 @section('content')
 <div class="blank"></div>
 <article>

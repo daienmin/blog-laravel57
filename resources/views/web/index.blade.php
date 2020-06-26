@@ -1,14 +1,18 @@
 @extends('layouts.web.common')
 
+@section('title', '首页');
+@section('keywords', '');
+@section('description', '');
+
 @section('content')
 <article>
-  {{--<div class="pics">
+  <div class="pics">
     <ul>
       <li><i><a href="/"><img src="{{ asset('images/front/t01.jpg') }}"></a></i><span>这组图片中的静物等非常的日系</span></li>
       <li><i><a href="/"><img src="{{ asset('images/front/t04.jpg') }}"></a></i><span>这组图片中的静物等非常的日系</span></li>
       <li><i><a href="/"><img src="{{ asset('images/front/t03.jpg') }}"></a></i><span>这组图片中的静物等非常的日系</span></li>
     </ul>
-  </div>--}}
+  </div>
   <div class="blank"></div>
   <div class="leftbox">
     {{--<div class="tuijian">
@@ -51,7 +55,12 @@
             @endif
             <p>{{ $v->description }}</p>
           </div>
-          <div class="autor"><span class="lm f_l"><a href="{{ url('/tag/' . $v->label_id) }}">{{ $v->label->label_name }}</a></span><span class="dtime f_l">{{ substr($v->created_at, 0, 10) }}</span><span class="viewnum f_l">浏览（{{ $v->views }}）</span><span class="f_r"><a href="{{ url('/article/' . $v->id) }}" class="more">阅读原文</a></span></div>
+          <div class="autor">
+              <span class="cate f_l"><a href="{{ url('/category/' . $v->cate_id) }}">{{ $v->category->cate_name }}</a></span>
+              <span class="lm f_l"><a href="{{ url('/tag/' . $v->label_id) }}">{{ $v->label->label_name }}</a></span>
+              <span class="dtime f_l">{{ substr($v->created_at, 0, 10) }}</span><span class="viewnum f_l">浏览（{{ $v->views }}）</span>
+              <span class="f_r"><a href="{{ url('/article/' . $v->id) }}" class="more">阅读原文</a></span>
+          </div>
         </li>
           @endforeach
         @endif
