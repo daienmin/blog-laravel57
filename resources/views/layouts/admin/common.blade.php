@@ -18,7 +18,6 @@
     <div class="lyear-layout-container">
         <!--左侧导航-->
         <aside class="lyear-layout-sidebar">
-
             <!-- logo -->
             <div id="logo" class="sidebar-header">
                 <a href="index.html"><img src="{{ asset('images/logo-sidebar.png') }}" title="LightYear" alt="LightYear" /></a>
@@ -42,6 +41,7 @@
                                 <li class="{{ str_contains(url()->current(), 'admin/user_manage') ? 'active' : '' }}"> <a href="{{ url('admin/user_manage') }}">用户列表</a> </li>
                             </ul>
                         </li>
+                        <li class="nav-item {{ str_contains(url()->current(), 'admin/link/index') ? 'active' : '' }}"> <a href="{{ url('admin/link/index') }}"><i class="mdi mdi-home"></i> 友情链接</a> </li>
                     </ul>
                 </nav>
 
@@ -75,9 +75,9 @@
                                 <span>{{ session()->get('user.username') }} <span class="caret"></span></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-right">
-                                <li> <a href="lyear_pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>
+                               {{-- <li> <a href="lyear_pages_profile.html"><i class="mdi mdi-account"></i> 个人信息</a> </li>
                                 <li> <a href="lyear_pages_edit_pwd.html"><i class="mdi mdi-lock-outline"></i> 修改密码</a> </li>
-                                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>
+                                <li> <a href="javascript:void(0)"><i class="mdi mdi-delete"></i> 清空缓存</a></li>--}}
                                 <li class="divider"></li>
                                 <li> <a href="{{ url('admin/login/logout') }}"><i class="mdi mdi-logout-variant"></i> 退出登录</a> </li>
                             </ul>

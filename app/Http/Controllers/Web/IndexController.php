@@ -37,6 +37,12 @@ class IndexController extends Controller
 
     public function article($id)
     {
+        $this->data['art_info'] = Article::where(['id' => (int) $id])->get();
+        if ($this->data['art_info']->isEmpty()) {
+            return redirect('/');
+        }
+        $this->data['art_prev'] = Article::where('id', '<', (int) $id)->orderBy('id', 'desc')->limit(1)->get();
+        $this->data['art_next'] = Article::where('id', '>', (int) $id)->orderBy('id', 'asc')->limit(1)->get();
         return view('web.info', $this->data);
     }
 

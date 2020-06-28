@@ -1,6 +1,6 @@
 @extends('layouts.web.common')
 
-@section('title', '');
+@section('title', $art_info[0]->title);
 @section('keywords', '');
 @section('description', '');
 
@@ -10,19 +10,31 @@
   <div class="leftbox">
     <div class="infos">
       <div class="newsview">
-        <h2 class="intitle">您现在的位置是：<a href="/">网站首页</a>&nbsp;&gt;&nbsp;<a href="/">学无止境</a></h2>
-        <h3 class="news_title">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</h3>
-        <div class="news_author"><span class="au01">杨青</span><span class="au02">2018-03-18</span><span class="au03">共<b>309</b>人围观</span></div>
-        <div class="tags"><a href="/">中兴</a> <a href="/" target="_blank">咔咔</a> <a href="/" target="_blank">MWC</a> <a href="/" target="_blank">小蚁</a> <a href="/" target="_blank">运动相机</a></div>
-        <div class="news_about"><strong>简介</strong>description</div>
-        <div class="news_infos">
-          content
+        <h3 class="news_title">{{ $art_info[0]->title }}</h3>
+        <div class="news_author">
+          <span class="au01">{{ $art_info[0]->user->username }}</span>
+          <span class="au02">{{ substr($art_info[0]->created_at, 0, 10) }}</span>
+          <span class="au03">共<b>309</b>人围观</span></div>
+        <div class="tags"><a href="{{ url('/tag/' . $art_info[0]->label_id) }}">{{ $art_info[0]->label->label_name }}</a></div>
+        <div class="news_about"><strong>简介</strong>{{ $art_info[0]->description }}</div>
+        <div class="news_infos article-content" id="article-content" style="padding: 20px 0;">
+          <textarea style="display:none;" placeholder="">{{ $art_info[0]->content }}</textarea>
         </div>
-
-
         <div class="nextinfo">
-          <p>上一篇：<a href="/" >传微软将把入门级Surface平板价格下调150美元</a></p>
-          <p>下一篇：<a href="/">云南之行――大理洱海一日游</a></p>
+          <p>上一篇：
+            @if(!empty($art_prev[0]))
+            <a href="{{ url('/article/' . $art_prev[0]->id) }}" >{{ $art_prev[0]->title }}</a>
+            @else
+              没有了
+            @endif
+          </p>
+          <p>下一篇：
+            @if(!empty($art_next[0]))
+              <a href="{{ url('/article/' . $art_next[0]->id) }}" >{{ $art_next[0]->title }}</a>
+            @else
+              没有了
+            @endif
+          </p>
         </div>
     {{--<div class="otherlink">
       <h2>相关文章</h2>
@@ -65,4 +77,31 @@
   </div>
   <div class="blank"></div>
 </article>
+<link rel="stylesheet" href="{{ asset('editor.md/css/editormd.preview.css') }}" />
+<script src="{{ asset('js/front/jquery-2.1.1.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/marked.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/prettify.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/raphael.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/underscore.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/sequence-diagram.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/flowchart.min.js') }}"></script>
+<script src="{{ asset('editor.md/lib/jquery.flowchart.min.js') }}"></script>
+<script src="{{ asset('editor.md/editormd.js') }}"></script>
+<script>
+    $(function() {
+        editormd.katexURL = {
+            css: '{{ asset('editor.md/katex.min') }}',
+            js : '{{ asset('editor.md/katex.min') }}'
+        };
+        editormd.markdownToHTML("article-content", {
+            htmlDecode      : "style,script,iframe",  // you can filter tags decode
+            emoji           : true,
+            taskList        : true,
+            tex             : true,  // 默认不解析
+            flowChart       : true,  // 默认不解析
+            sequenceDiagram : true,  // 默认不解析
+        });
+    });
+</script>
+  
 @endsection
